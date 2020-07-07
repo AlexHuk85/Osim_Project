@@ -10,11 +10,20 @@ def connect():
 def add(part_name,part_number,Qty,model):
     conn = sqlite3.connect("partlist.db")
     cur = conn.cursor()
-    cur.execute("INSERT INTO parts WHERE part_name=?,part_number=?,Qty=?,model=?",(part_name,part_number,Qty,model))
+    cur.execute("INSERT INTO parts VALUES (NULL,?,?,?,?)",(part_name,part_number,Qty,model))
     conn.commit()
     conn.close()
+
+def view():
+    conn = sqlite3.connect("partlist.db")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM parts")
+    row = cur.fetchall()
+    conn.close()
+    return row
 
 
 
 connect()
-add('testing','C808xx-xx-xxxx',5,'OS808-uDivine')
+#add('testing','C808xx-xx-xxxx',5,'OS808-uDivine')
+print(view())
