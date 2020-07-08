@@ -22,8 +22,30 @@ def view():
     conn.close()
     return row
 
+def delete(id):
+    conn = sqlite3.connect("partlist.db")
+    cur = conn.cursor()
+    cur.execute("DELETE FROM parts WHERE id=?")
+    conn.commit()
+    conn.close()
 
+def update(id,model,part_name,part_number,Qty):
+    conn = sqlite3.connect("partlist.db")
+    cur = conn.cursor()
+    cur.execute("UPDATE parts SET model=?,part_name=?,part_number=?,Qty=? WHERE id=?",(model,part_name,part_number,Qty,id))
+    conn.commit()
+    conn.close()
+
+def search(model='',part_name='',part_number='',Qty=''):
+    conn = sqlite3.connect("partlist.db")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM parts WHERE model=? OR part_name=? OR part_number=? OR Qty=?",(model,part_name,part_number,Qty))
+    row = cur.fetchall()
+    conn.close()
+    return row
 
 connect()
-add('OS808-uDivine','testing','C808xx-xx-xxxx',5)
+#add('OS808-uDivine','testing','C808xx-xx-xxxx',5)
+update(1,'OS808-uDivine','Kneading motor','C808xx-xx-xxxx',5)
+print(search(part_name='Kneading motor'))
 print(view())
