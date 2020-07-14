@@ -38,7 +38,8 @@ def search(model='',part_name='',part_number='',qty=''):
     return row
 
 connect()
-#add('OS808-uDivine','testing','C808xx-xx-xxxx',5)
+add('OS808-uDivine','testing','C808xx-xx-xxxx',5)
+add('OS868-uLove', 'Up Down Motor', 'C868XX-XX-F19',10)
 #update(1,'OS808-uDivine','Kneading motor','C808xx-xx-xxxx',5)
 #print(search(part_name='Kneading motor'))
-#print(view())
+print(view())
