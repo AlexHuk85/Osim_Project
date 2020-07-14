@@ -1,51 +1,44 @@
 import sqlite3
 
 def connect():
-    conn = sqlite3.connect("partlist.db")
+    conn = sqlite3.connect("partslist_DEMO.db")
     cur = conn.cursor()
-    cur.execute("CREATE TABLE IF NOT EXISTS parts (id INTEGER PRIMARY KEY, model TEXT, part_name TEXT, part_number TEXT, Qty INTEGER)")
+    cur.execute("CREATE TABLE IF NOT EXISTS parts (id INTEGER PRIMARY KEY, model TEXT, part_name TEXT, part_number TEXT, qty INTEGER)")
     conn.commit()
     conn.close()
 
-def add(model,part_name,part_number,Qty):
-    conn = sqlite3.connect("partlist.db")
+def add(model,part_name,part_number,qty):
+    conn = sqlite3.connect("partslist_DEMO.db")
     cur = conn.cursor()
-    cur.execute("INSERT INTO parts VALUES (NULL,?,?,?,?)",(model,part_name,part_number,Qty))
+    cur.execute("INSERT INTO parts VALUES (NULL,?,?,?,?)",(model,part_name,part_number,qty))
     conn.commit()
     conn.close()
 
 def view():
-    conn = sqlite3.connect("partlist.db")
+    conn = sqlite3.connect("partslist_DEMO.db")
     cur = conn.cursor()
     cur.execute("SELECT * FROM parts")
     row = cur.fetchall()
     conn.close()
     return row
 
-def delete(id):
-    conn = sqlite3.connect("partlist.db")
+def update(id,model,part_name,part_number,qty):
+    conn = sqlite3.connect("partslist_DEMO.db")
     cur = conn.cursor()
-    cur.execute("DELETE FROM parts WHERE id=?")
+    cur.execute("UPDATE parts SET model=?,part_name=?,part_number=?,qty=? WHERE id=?",(model,part_name,part_number,qty,id))
     conn.commit()
     conn.close()
 
-def update(id,model,part_name,part_number,Qty):
-    conn = sqlite3.connect("partlist.db")
+def search(model='',part_name='',part_number='',qty=''):
+    conn = sqlite3.connect("partslist_DEMO.db")
     cur = conn.cursor()
-    cur.execute("UPDATE parts SET model=?,part_name=?,part_number=?,Qty=? WHERE id=?",(model,part_name,part_number,Qty,id))
-    conn.commit()
-    conn.close()
-
-def search(model='',part_name='',part_number='',Qty=''):
-    conn = sqlite3.connect("partlist.db")
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM parts WHERE model=? OR part_name=? OR part_number=? OR Qty=?",(model,part_name,part_number,Qty))
+    cur.execute("SELECT * FROM parts WHERE model LIKE ? OR part_name LIKE ? OR part_number LIKE ?",('%'+model+'%','%'+part_name+'%','%'+part_number+'%'))
     row = cur.fetchall()
     conn.close()
     return row
 
 connect()
 #add('OS808-uDivine','testing','C808xx-xx-xxxx',5)
-update(1,'OS808-uDivine','Kneading motor','C808xx-xx-xxxx',5)
-print(search(part_name='Kneading motor'))
-print(view())
+#update(1,'OS808-uDivine','Kneading motor','C808xx-xx-xxxx',5)
+#print(search(part_name='Kneading motor'))
+#print(view())
