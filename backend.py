@@ -32,7 +32,7 @@ def update(id,model,part_name,part_number,qty):
 def search(model='',part_name='',part_number=''):
     conn = sqlite3.connect("partslist_DEMO.db")
     cur = conn.cursor()
-    cur.execute("SELECT * FROM parts WHERE model LIKE ? OR part_name LIKE ? OR part_number LIKE ?",('%'+model+'%','%'+part_name+'%','%'+part_number+'%'))
+    cur.execute("SELECT * FROM parts WHERE model LIKE ? AND part_name LIKE ? AND part_number like ?",('%'+model+'%','%'+part_name+'%','%'+part_number+'%'))
     row = cur.fetchall()
     conn.close()
     return row
@@ -41,7 +41,7 @@ connect()
 #add('OS808-uDivine','testing','C808xx-xx-xxxx',5)
 #add('OS868-uLove', 'Up Down Motor', 'C868XX-XX-F19',10)
 #update(1,'OS808-uDivine','Kneading motor','C808xx-xx-xxxx',5)
-#print(search(part_name='Kneading motor'))
+#print(search(part_name='motor'))
 #print(view())
-
+#print(search_number(part_number='00'))
 
