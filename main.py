@@ -16,6 +16,14 @@ def view_command():
     for row in rows:
         listbox.insert(END,row)
 
+def search_command():
+    rows = backend.search(entry_model_Value.get(),entry_name_Value.get(),entry_number_Value.get())
+    listbox.delete(0,END)  
+    for row in rows:
+        listbox.insert(END,row)
+
+    
+
 #---------------------------------------------listbox
 listbox = Listbox(window,height=30,width=30)
 listbox.grid(row=0,column=0,rowspan=10)
@@ -67,7 +75,7 @@ minus_button.grid(row=4,column=3)
 view_button = Button(window,text='View',width=20,command=view_command)
 view_button.grid(row=5,column=2)
 
-search_button = Button(window,text='Search',width=20)
+search_button = Button(window,text='Search',width=20,command=search_command)
 search_button.grid(row=5,column=3)
 
 update_button = Button(window,text='Update',width=20)
