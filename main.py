@@ -22,8 +22,27 @@ def search_command():
     for row in rows:
         listbox.insert(END,row)
 
-    
+def minus_command():
+    num = entry_qty_Value.get()
+    entry_qty.delete(0,END)
+    entry_qty.insert(END,int(num)-1)
 
+    
+def get_selected_row(event):
+    try:
+        global selected_tuple
+        index = listbox.curselection()[0]
+        selected_tuple = listbox.get(index)
+        entry_model.delete(0,END)
+        entry_model.insert(END,selected_tuple[1])
+        entry_name.delete(0,END)
+        entry_name.insert(END,selected_tuple[2])
+        entry_number.delete(0,END)
+        entry_number.insert(END,selected_tuple[3])
+        entry_qty.delete(0,END)
+        entry_qty.insert(END,selected_tuple[4])
+    except IndexError:
+        pass
 #---------------------------------------------listbox
 listbox = Listbox(window,height=30,width=30)
 listbox.grid(row=0,column=0,rowspan=10)
@@ -34,6 +53,7 @@ sb.grid(row=0,column=1)
 listbox.configure(yscrollcommand=sb.set)
 sb.configure(command=listbox.yview)
 
+listbox.bind('<<ListboxSelect>>',get_selected_row)
 #---------------------------------------------label X4
 label_model = Label(window,text='Model')
 label_model.grid(row=0,column=2)
@@ -69,7 +89,7 @@ entry_qty.grid(row=3,column=3)
 #plus_button = Button(window,text='+1')
 #plus_button.grid(row=4,column=2,rowspan=2)
 
-minus_button = Button(window,text='-1',width=3)
+minus_button = Button(window,text='-1',width=3,command=minus_command)
 minus_button.grid(row=4,column=3)
 
 view_button = Button(window,text='View',width=20,command=view_command)
