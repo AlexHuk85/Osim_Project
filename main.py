@@ -43,6 +43,10 @@ def get_selected_row(event):
         entry_qty.insert(END,selected_tuple[4])
     except IndexError:
         pass
+
+def update_command():
+    backend.update(selected_tuple[0],entry_model_Value.get(),entry_name_Value.get(),entry_number_Value.get(),entry_qty_Value.get())
+    view_command()
 #---------------------------------------------listbox
 listbox = Listbox(window,height=30,width=30)
 listbox.grid(row=0,column=0,rowspan=10)
@@ -98,7 +102,7 @@ view_button.grid(row=5,column=2)
 search_button = Button(window,text='Search',width=20,command=search_command)
 search_button.grid(row=5,column=3)
 
-update_button = Button(window,text='Update',width=20)
+update_button = Button(window,text='Update',width=20,command=update_command)
 update_button.grid(row=6,column=2)
 
 add_button = Button(window,text='Add',width=20,command=add_command)
