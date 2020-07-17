@@ -47,6 +47,12 @@ def get_selected_row(event):
 def update_command():
     backend.update(selected_tuple[0],entry_model_Value.get(),entry_name_Value.get(),entry_number_Value.get(),entry_qty_Value.get())
     view_command()
+
+def clear():
+    entry_model.delete(0,END)   
+    entry_name.delete(0,END)       
+    entry_number.delete(0,END)     
+    entry_qty.delete(0,END)
 #---------------------------------------------listbox
 listbox = Listbox(window,height=30,width=30)
 listbox.grid(row=0,column=0,rowspan=10)
@@ -111,6 +117,7 @@ add_button.grid(row=6,column=3)
 close_button = Button(window,text='Close',width=20,command=window.destroy)
 close_button.grid(row=7,column=3)
 
-
+clear_button = Button(window,text='Clear',width=20,command=clear)
+clear_button.grid(row=7,column=2)
 
 window.mainloop()
