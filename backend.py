@@ -37,6 +37,9 @@ def search(model='',part_name='',part_number=''):
     conn.close()
     return row
 
+#-------------------------------------------read old data from xlxs
+
+
 connect()
 #add('OS808-uDivine','testing','C808xx-xx-xxxx',5)
 #add('OS868-uLove', 'Up Down Motor', 'C868XX-XX-F19',10)
