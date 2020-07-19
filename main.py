@@ -54,7 +54,7 @@ def clear():
     entry_number.delete(0,END)     
     entry_qty.delete(0,END)
 #---------------------------------------------listbox
-listbox = Listbox(window,height=30,width=30)
+listbox = Listbox(window,height=30,width=70)
 listbox.grid(row=0,column=0,rowspan=10)
 
 sb = Scrollbar(window)
