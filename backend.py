@@ -31,8 +31,10 @@ def connect():
     conn = sqlite3.connect("partslist_DEMO.db")
     cur = conn.cursor()
     cur.execute("CREATE TABLE IF NOT EXISTS parts (id INTEGER PRIMARY KEY, model TEXT, part_name TEXT, part_number TEXT, qty INTEGER)")
+    
     conn.commit()
     conn.close()
+
 
 def add(model,part_name,part_number,qty):
     conn = sqlite3.connect("partslist_DEMO.db")
@@ -99,11 +101,7 @@ def save_data():
             add('873 uRegal',item[0],item[1],item[2])
 
 connect()
-#save_data()
-#add('OS808-uDivine','testing','C808xx-xx-xxxx',5)
-#add('OS868-uLove', 'Up Down Motor', 'C868XX-XX-F19',10)
-#update(1,'OS808-uDivine','Kneading motor','C808xx-xx-xxxx',5)
-#print(search(part_name='motor'))
-#print(view())
-#print(search_number(part_number='00'))
+if len(search(model='808')) < 1:
+    save_data()
+
 
