@@ -1,0 +1,4 @@
+([('main',
+   '/Users/alex/Dropbox/My Mac '
+   '(192-168-1-112.tpgi.com.au)/Desktop/Python/Osim_Project/dist/main',
+   'EXECUTABLE')],)
